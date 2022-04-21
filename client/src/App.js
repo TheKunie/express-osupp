@@ -1,11 +1,11 @@
-import logo from './logo.svg';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Button, Input } from '@chakra-ui/react';
+import { Button, Input, Stack, Heading } from '@chakra-ui/react';
 
 function App() {
   const [data, setData] = useState({});
   const [search, setSearch] = useState('');
+  const [info, setInfo] = useState({});
 
   async function callBackendAPI() {
     const response = await fetch('/express_backend');
@@ -24,7 +24,7 @@ function App() {
       data: {
         search: search,
       },
-    }).then((res) => console.log(res));
+    }).then((res) => setInfo(res.data));
   };
 
   useEffect(() => {
@@ -35,10 +35,12 @@ function App() {
 
   return (
     <>
-      <h1>{data.data}</h1>
-      <Button onClick={() => callBackendAPI()}>Backend Connect</Button>
-      <Input onChange={(e) => setSearch(e.target.value)}></Input>
-      <Button onClick={() => submit()}>Submit</Button>
+      <Stack spacing={6}>
+        <Heading as="h1">{data.data}</Heading>
+        <Button onClick={() => callBackendAPI()}>Backend Connect</Button>
+        <Input onChange={(e) => setSearch(e.target.value)}></Input>
+        <Button onClick={() => submit()}>Submit</Button>
+      </Stack>
     </>
   );
 }
