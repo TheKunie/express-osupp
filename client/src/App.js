@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Button, Input } from '@chakra-ui/react';
 
 function App() {
   const [data, setData] = useState({});
@@ -35,9 +36,9 @@ function App() {
   return (
     <>
       <h1>{data.data}</h1>
-      <button onClick={() => callBackendAPI()}>Backend Connect</button>
-      <input onChange={(e) => setSearch(e.target.value)}></input>
-      <button onClick={() => submit()}>Submit</button>
+      <Button onClick={() => callBackendAPI()}>Backend Connect</Button>
+      <Input onChange={(e) => setSearch(e.target.value)}></Input>
+      <Button onClick={() => submit()}>Submit</Button>
     </>
   );
 }
