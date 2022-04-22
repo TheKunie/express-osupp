@@ -11,6 +11,7 @@ import {
   Divider,
   Center,
   Spinner,
+  Text,
 } from '@chakra-ui/react';
 import { RenderData } from './Render';
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
@@ -69,6 +70,7 @@ function App() {
     <>
       <Container centerContent>
         <Stack spacing={6}>
+          <HStack></HStack>
           {data.data ? <CheckIcon color="green" /> : <CloseIcon color="red" />}
           <Button onClick={() => callBackendAPI()}>Backend Connect</Button>
           <Input onChange={(e) => setSearch(e.target.value)}></Input>
