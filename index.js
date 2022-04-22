@@ -29,6 +29,9 @@ app.post('/osu', (req, res, next) => {
       u: req.body.search,
     },
   }).then((response) => {
+    if (response.data[0] === undefined) {
+      res.json({ user_found: false });
+    }
     res.json(response.data[0]);
     console.log(response.data[0]);
   });

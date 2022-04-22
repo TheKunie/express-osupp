@@ -19,6 +19,7 @@ function App() {
   const [search, setSearch] = useState('');
   const [info, setInfo] = useState({});
   const [loading, setLoading] = useState(false);
+  const [noUser, setNoUser] = useState(false);
 
   async function callBackendAPI() {
     const response = await fetch('/express_backend');
@@ -38,7 +39,18 @@ function App() {
       data: {
         search: search,
       },
-    }).then((res) => setInfo(res.data));
+    }).then((res) => {
+      if ('user_found' in res.data) {
+        setNoUser(true);
+        setLoading(false);
+        return null;
+      }
+      if (noUser) {
+        setNoUser(false);
+      }
+      setInfo(res.data);
+      console.log('DATA:  ' + res);
+    });
     setLoading(false);
   };
 
@@ -47,6 +59,10 @@ function App() {
       .then((res) => setData({ data: res.express }))
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    setInfo({});
+  }, [search]);
 
   return (
     <>
@@ -63,6 +79,11 @@ function App() {
               Refresh
             </Button>
           </HStack>
+          {noUser ? (
+            <Center>
+              <Heading as="h3">No User Found</Heading>
+            </Center>
+          ) : null}
           {loading ? (
             <Center>
               <Spinner />
