@@ -18,21 +18,29 @@ import { RenderData } from './Render';
 import { CheckIcon, CloseIcon, RepeatIcon } from '@chakra-ui/icons';
 
 function App() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({ data: false });
   const [search, setSearch] = useState('');
   const [info, setInfo] = useState({});
   const [loading, setLoading] = useState(false);
   const [noUser, setNoUser] = useState(false);
 
-  async function callBackendAPI() {
-    const response = await fetch('/express_backend');
-    const body = await response.json();
+  function callBackendAPI() {
+    axios
+      .get('/express_backend')
+      .then((res) => {
+        if (res.status === 200) {
+          setData({ data: true });
+        } else {
+          setData({ data: false });
+        }
+      })
+      .catch((err) => setData({ data: false }));
 
-    if (response.status !== 200) {
-      setData({ data: false });
+    /*     if (response.status !== 200) {
       throw Error(body.message);
     }
-    return body;
+    setData({ data: true }); */
+    return null;
   }
 
   const submit = () => {
@@ -59,9 +67,7 @@ function App() {
   };
 
   useEffect(() => {
-    callBackendAPI()
-      .then((res) => setData({ data: res.connected }))
-      .catch((err) => console.log(err));
+    callBackendAPI(); //.catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
@@ -72,18 +78,20 @@ function App() {
     <>
       <Container centerContent>
         <Stack spacing={6}>
-          <HStack>
-            <Text fontSize="xl">Backend connection status: </Text>
-            {data.data ? (
-              <CheckIcon color="green" />
-            ) : (
-              <CloseIcon color="red" />
-            )}
-            <IconButton
-              onClick={() => callBackendAPI()}
-              icon={<RepeatIcon color="blue" />}
-            />
-          </HStack>
+          <Center>
+            <HStack>
+              <Text fontSize="xl">Backend connection status: </Text>
+              {data.data ? (
+                <CheckIcon color="green" />
+              ) : (
+                <CloseIcon color="red" />
+              )}
+              <IconButton
+                onClick={() => callBackendAPI()}
+                icon={<RepeatIcon color="blue" />}
+              />
+            </HStack>
+          </Center>
 
           <Input onChange={(e) => setSearch(e.target.value)}></Input>
           <HStack divider={<Divider orientation="vertical" />} justify="center">
