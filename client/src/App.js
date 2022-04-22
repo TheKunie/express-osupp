@@ -103,10 +103,18 @@ function App() {
 
           <Input onChange={(e) => setSearch(e.target.value)}></Input>
           <HStack divider={<Divider orientation="vertical" />} justify="center">
-            <Button onClick={() => submit()} colorScheme="green">
+            <Button
+              onClick={() => submit()}
+              disabled={data.data ? false : true}
+              colorScheme="green"
+            >
               Submit
             </Button>
-            <Button onClick={() => console.log(data)} variant="outline">
+            <Button
+              onClick={() => console.log(data)}
+              disabled={data.data ? false : true}
+              variant="outline"
+            >
               Refresh
             </Button>
           </HStack>
