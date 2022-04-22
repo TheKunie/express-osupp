@@ -69,7 +69,7 @@ function App() {
     <>
       <Container centerContent>
         <Stack spacing={6}>
-          {}
+          {data.connected ? <CheckIcon /> : null}
           <Button onClick={() => callBackendAPI()}>Backend Connect</Button>
           <Input onChange={(e) => setSearch(e.target.value)}></Input>
           <HStack divider={<Divider orientation="vertical" />} justify="center">
