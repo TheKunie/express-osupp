@@ -22,7 +22,15 @@ export function RenderData(props) {
     <>
       <Box>
         <Divider />
-          {toast ? }
+        {toast
+          ? alert({
+              title: 'User not found.',
+              description: 'Please try again.',
+              status: 'error',
+              duration: 9000,
+              isClosable: true,
+            })
+          : null}
         <Center>
           <Heading as="h2">{data.username}</Heading>
         </Center>
