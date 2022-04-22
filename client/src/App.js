@@ -12,9 +12,10 @@ import {
   Center,
   Spinner,
   Text,
+  IconButton,
 } from '@chakra-ui/react';
 import { RenderData } from './Render';
-import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
+import { CheckIcon, CloseIcon, RepeatIcon } from '@chakra-ui/icons';
 
 function App() {
   const [data, setData] = useState({});
@@ -70,9 +71,19 @@ function App() {
     <>
       <Container centerContent>
         <Stack spacing={6}>
-          <HStack></HStack>
-          {data.data ? <CheckIcon color="green" /> : <CloseIcon color="red" />}
-          <Button onClick={() => callBackendAPI()}>Backend Connect</Button>
+          <HStack>
+            <Text fontSize="xl">Backend connection status: </Text>
+            {data.data ? (
+              <CheckIcon color="green" />
+            ) : (
+              <CloseIcon color="red" />
+            )}
+            <IconButton
+              onClick={() => callBackendAPI()}
+              icon={<RepeatIcon color="blue" />}
+            />
+          </HStack>
+
           <Input onChange={(e) => setSearch(e.target.value)}></Input>
           <HStack divider={<Divider orientation="vertical" />} justify="center">
             <Button onClick={() => submit()} colorScheme="green">
