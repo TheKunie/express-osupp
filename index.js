@@ -36,7 +36,7 @@ app.post('/osu', (req, res, next) => {
       res.json(response.data[0]);
       console.log(response.data[0]);
     });
-  }, 1000);
+  }, 0);
   //res.json({ hey: 'received' });
 });
 

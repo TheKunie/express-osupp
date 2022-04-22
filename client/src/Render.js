@@ -27,6 +27,10 @@ export function RenderData(props) {
   const toast = props.toast;
   const alert = useToast();
 
+  if (!('user_id' in data)) {
+    return null;
+  }
+
   return (
     <>
       <Box>
