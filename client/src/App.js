@@ -13,6 +13,7 @@ import {
   Spinner,
   Text,
   IconButton,
+  useToast,
 } from '@chakra-ui/react';
 import { RenderData } from './Render';
 import { CheckIcon, CloseIcon, RepeatIcon } from '@chakra-ui/icons';
@@ -23,6 +24,7 @@ function App() {
   const [info, setInfo] = useState({});
   const [loading, setLoading] = useState(false);
   const [noUser, setNoUser] = useState(false);
+  const [toast, setToast] = useState(false);
 
   function callBackendAPI() {
     axios
@@ -74,6 +76,12 @@ function App() {
     setInfo({});
   }, [search]);
 
+  useEffect(() => {
+    if (!('user_id' in info) && info !== {}) {
+      setToast(true);
+    }
+  }, [info]);
+
   return (
     <>
       <Container centerContent>
@@ -112,7 +120,7 @@ function App() {
               <Spinner />
             </Center>
           ) : null}
-          <RenderData data={info} />
+          <RenderData data={info} toast={toast} />
         </Stack>
       </Container>
     </>

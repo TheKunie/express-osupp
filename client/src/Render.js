@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Divider,
   Image,
@@ -15,13 +15,14 @@ import {
 export function RenderData(props) {
   var data = props.data;
 
-  if (!('user_id' in data)) {
-    return null;
-  }
+  const toast = props.toast;
+  const alert = useToast();
+
   return (
     <>
       <Box>
         <Divider />
+          {toast ? }
         <Center>
           <Heading as="h2">{data.username}</Heading>
         </Center>
