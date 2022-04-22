@@ -21,20 +21,22 @@ app.get('/express_backend', (req, res) => {
 });
 
 app.post('/osu', (req, res, next) => {
-  axios({
-    method: 'get',
-    url: 'https://osu.ppy.sh/api/get_user',
-    params: {
-      k: apiKey,
-      u: req.body.search,
-    },
-  }).then((response) => {
-    if (response.data[0] === undefined) {
-      res.json({ user_found: false });
-    }
-    res.json(response.data[0]);
-    console.log(response.data[0]);
-  });
+  setTimeout(() => {
+    axios({
+      method: 'get',
+      url: 'https://osu.ppy.sh/api/get_user',
+      params: {
+        k: apiKey,
+        u: req.body.search,
+      },
+    }).then((response) => {
+      if (response.data[0] === undefined) {
+        res.json({ user_found: false });
+      }
+      res.json(response.data[0]);
+      console.log(response.data[0]);
+    });
+  }, 1000);
   //res.json({ hey: 'received' });
 });
 

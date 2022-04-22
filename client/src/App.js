@@ -32,6 +32,7 @@ function App() {
   }
 
   const submit = () => {
+    setInfo({});
     setLoading(true);
     axios({
       method: 'post',
@@ -49,7 +50,6 @@ function App() {
         setNoUser(false);
       }
       setInfo(res.data);
-      console.log('DATA:  ' + res);
     });
     setLoading(false);
   };

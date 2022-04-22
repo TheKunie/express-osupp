@@ -22,29 +22,38 @@ export function RenderData(props) {
     <>
       <Box>
         <Divider />
-        <Heading as="h2">{data.username}</Heading>
-        <HStack>
-          <Image boxSize="128px" src={'http://s.ppy.sh/a/' + data.user_id} />
-          <Box h={128} borderWidth="1px" borderRadius="lg" overflow="hidden">
-            <HStack
-              align="center"
-              divider={
-                <Center height="128px">
-                  <Divider orientation="vertical" />
-                </Center>
-              }
-            >
-              <Stat align="center">
-                <StatLabel>PP (Performance Points)</StatLabel>
-                <StatNumber>{data.pp_raw}</StatNumber>
-              </Stat>
-              <Stat align="center">
-                <StatLabel>Accuracy</StatLabel>
-                <StatNumber>{data.accuracy}</StatNumber>
-              </Stat>
-            </HStack>
-          </Box>
-        </HStack>
+        <Center>
+          <Heading as="h2">{data.username}</Heading>
+        </Center>
+        <Center>
+          <HStack>
+            <Box h={128} borderWidth="2px" borderRadius="lg" overflow="hidden">
+              <HStack
+                align="center"
+                divider={
+                  <Center height="128px">
+                    <Divider orientation="vertical" />
+                  </Center>
+                }
+              >
+                <Image
+                  boxSize="128px"
+                  src={'http://s.ppy.sh/a/' + data.user_id}
+                />
+                <Stat align="center">
+                  <StatLabel>PP (Performance Points)</StatLabel>
+                  <StatNumber>{data.pp_raw}</StatNumber>
+                </Stat>
+                <Stat align="center">
+                  <StatLabel>Accuracy</StatLabel>
+                  <StatNumber>
+                    {Math.round(data.accuracy * 100) / 100 + '%'}
+                  </StatNumber>
+                </Stat>
+              </HStack>
+            </Box>
+          </HStack>
+        </Center>
       </Box>
     </>
   );
