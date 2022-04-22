@@ -41,7 +41,13 @@ export function RenderData(props) {
         </Center>
         <Center>
           <HStack>
-            <Box h={128} borderWidth="2px" borderRadius="lg" overflow="hidden">
+            <Box
+              h={128}
+              w={128 * 3}
+              borderWidth="2px"
+              borderRadius="lg"
+              overflow="hidden"
+            >
               <HStack
                 align="center"
                 divider={
@@ -68,6 +74,31 @@ export function RenderData(props) {
             </Box>
           </HStack>
         </Center>
+        <HStack>
+          <Box h={128} borderWidth="2px" borderRadius="lg" overflow="hidden">
+            <HStack
+              align="center"
+              divider={
+                <Center height="128px">
+                  <Divider orientation="vertical" />
+                </Center>
+              }
+            >
+              <Stat align="center">
+                <StatLabel>PP (Performance Points)</StatLabel>
+                <StatNumber>{data.pp_raw}</StatNumber>
+              </Stat>
+              <Stat align="center">
+                <StatLabel>PP (Performance Points)</StatLabel>
+                <StatNumber>{data.pp_raw}</StatNumber>
+              </Stat>
+              <Stat align="center">
+                <StatLabel>PP (Performance Points)</StatLabel>
+                <StatNumber>{data.pp_raw}</StatNumber>
+              </Stat>
+            </HStack>
+          </Box>
+        </HStack>
       </Box>
     </>
   );
