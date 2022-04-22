@@ -69,14 +69,14 @@ function App() {
     <>
       <Container centerContent>
         <Stack spacing={6}>
-          {data.connected ? <CheckIcon /> : null}
+          {data.data ? <CheckIcon color="green" /> : null}
           <Button onClick={() => callBackendAPI()}>Backend Connect</Button>
           <Input onChange={(e) => setSearch(e.target.value)}></Input>
           <HStack divider={<Divider orientation="vertical" />} justify="center">
             <Button onClick={() => submit()} colorScheme="green">
               Submit
             </Button>
-            <Button onClick={() => submit()} variant="outline">
+            <Button onClick={() => console.log(data)} variant="outline">
               Refresh
             </Button>
           </HStack>
