@@ -13,6 +13,7 @@ import {
   Spinner,
 } from '@chakra-ui/react';
 import { RenderData } from './Render';
+import { CheckIcon } from '@chakra-ui/icons';
 
 function App() {
   const [data, setData] = useState({});
@@ -56,7 +57,7 @@ function App() {
 
   useEffect(() => {
     callBackendAPI()
-      .then((res) => setData({ data: res.express }))
+      .then((res) => setData({ data: res.connected }))
       .catch((err) => console.log(err));
   }, []);
 
@@ -68,7 +69,7 @@ function App() {
     <>
       <Container centerContent>
         <Stack spacing={6}>
-          <Heading as="h1">{data.data}</Heading>
+          {}
           <Button onClick={() => callBackendAPI()}>Backend Connect</Button>
           <Input onChange={(e) => setSearch(e.target.value)}></Input>
           <HStack divider={<Divider orientation="vertical" />} justify="center">

@@ -16,7 +16,7 @@ app.use(express.static('static'));
 const apiKey = '860d6158e141567d52f57e44f687bdc3ec359a2e';
 
 app.get('/express_backend', (req, res) => {
-  res.send({ express: 'Express backend connected to React' });
+  res.send({ connected: true });
   console.log('connected');
 });
 
