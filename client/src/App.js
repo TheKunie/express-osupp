@@ -29,6 +29,7 @@ function App() {
     const body = await response.json();
 
     if (response.status !== 200) {
+      setData({ data: false });
       throw Error(body.message);
     }
     return body;
