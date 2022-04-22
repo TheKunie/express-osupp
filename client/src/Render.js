@@ -10,7 +10,16 @@ import {
   StatLabel,
   StatNumber,
   Center,
+  useToast,
 } from '@chakra-ui/react';
+/* 
+()=> alert({
+  title: 'User not found.',
+  description: 'Please try again.',
+  status: 'error',
+  duration: 9000,
+  isClosable: true,
+}) */
 
 export function RenderData(props) {
   var data = props.data;
@@ -22,15 +31,7 @@ export function RenderData(props) {
     <>
       <Box>
         <Divider />
-        {toast
-          ? alert({
-              title: 'User not found.',
-              description: 'Please try again.',
-              status: 'error',
-              duration: 9000,
-              isClosable: true,
-            })
-          : null}
+        {toast ? null : null}
         <Center>
           <Heading as="h2">{data.username}</Heading>
         </Center>
