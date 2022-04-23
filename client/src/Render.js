@@ -41,13 +41,12 @@ export function RenderData(props) {
         </Center>
         <Center>
           <HStack>
-            <Box
-              h={128}
-              w={128 * 3}
-              borderWidth="2px"
-              borderRadius="lg"
-              overflow="hidden"
-            >
+            <Image
+              htmlHeight={128}
+              htmlWidth={128}
+              src={'http://s.ppy.sh/a/' + data.user_id}
+            />
+            <Box h={128} borderWidth="2px" borderRadius="lg" overflow="hidden">
               <HStack
                 align="center"
                 divider={
@@ -56,24 +55,27 @@ export function RenderData(props) {
                   </Center>
                 }
               >
-                <Image
-                  boxSize="128px"
-                  src={'http://s.ppy.sh/a/' + data.user_id}
-                />
-                <Stat align="center">
-                  <StatLabel>PP (Performance Points)</StatLabel>
-                  <StatNumber>{data.pp_raw}</StatNumber>
-                </Stat>
-                <Stat align="center">
-                  <StatLabel>Accuracy</StatLabel>
-                  <StatNumber>
-                    {Math.round(data.accuracy * 100) / 100 + '%'}
-                  </StatNumber>
-                </Stat>
+                <Box w={128}>
+                  <Stat align="center">
+                    <StatLabel>PP (Performance Points)</StatLabel>
+                    <StatNumber>{data.pp_raw}</StatNumber>
+                  </Stat>
+                </Box>
+                <Box w={128}>
+                  <Stat align="center">
+                    <StatLabel>Accuracy</StatLabel>
+                    <StatNumber>
+                      {Math.round(data.accuracy * 100) / 100 + '%'}
+                    </StatNumber>
+                  </Stat>
+                </Box>
               </HStack>
             </Box>
           </HStack>
         </Center>
+        <br />
+        <Divider />
+        <br />
         <HStack>
           <Box h={128} borderWidth="2px" borderRadius="lg" overflow="hidden">
             <HStack
@@ -84,18 +86,24 @@ export function RenderData(props) {
                 </Center>
               }
             >
-              <Stat align="center">
-                <StatLabel>PP (Performance Points)</StatLabel>
-                <StatNumber>{data.pp_raw}</StatNumber>
-              </Stat>
-              <Stat align="center">
-                <StatLabel>PP (Performance Points)</StatLabel>
-                <StatNumber>{data.pp_raw}</StatNumber>
-              </Stat>
-              <Stat align="center">
-                <StatLabel>PP (Performance Points)</StatLabel>
-                <StatNumber>{data.pp_raw}</StatNumber>
-              </Stat>
+              <Box w={128}>
+                <Stat align="center">
+                  <StatLabel>Rank (World)</StatLabel>
+                  <StatNumber>{'#' + data.pp_rank}</StatNumber>
+                </Stat>
+              </Box>
+              <Box w={128}>
+                <Stat align="center">
+                  <StatLabel>Rank (Local)</StatLabel>
+                  <StatNumber>{'#' + data.pp_country_rank}</StatNumber>
+                </Stat>
+              </Box>
+              <Box w={128}>
+                <Stat align="center">
+                  <StatLabel>Country</StatLabel>
+                  <StatNumber>{data.country}</StatNumber>
+                </Stat>
+              </Box>
             </HStack>
           </Box>
         </HStack>
