@@ -30,6 +30,7 @@ function App() {
 
   var debounce = require('lodash.debounce');
   var isequal = require('lodash.isequal');
+  var validator = require('validator');
 
   function callBackendAPI() {
     axios
@@ -49,6 +50,10 @@ function App() {
     setData({ data: true }); */
     return null;
   }
+
+  const validate = (str) => {
+    return validate.isAlphanumeric(str, 'en-US', ' -[]_');
+  };
 
   const submit = () => {
     setInfo({});
@@ -79,6 +84,11 @@ function App() {
 
   useEffect(() => {
     setInfo({});
+
+    if (!validate(search)) {
+      setInvalid(true);
+      return null;
+    }
 
     if (!isequal(search, '')) {
       submit();
@@ -135,6 +145,13 @@ function App() {
           {noUser ? (
             <Center>
               <Heading as="h3">No User Found</Heading>
+            </Center>
+          ) : null}
+          {invalid ? (
+            <Center>
+              <Heading as="h4" color="red">
+                Invalid Username
+              </Heading>
             </Center>
           ) : null}
           {loading ? (
