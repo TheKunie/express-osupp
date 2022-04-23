@@ -19,14 +19,17 @@ import { RenderData } from './Render';
 import { CheckIcon, CloseIcon, RepeatIcon } from '@chakra-ui/icons';
 
 function App() {
-  const [data, setData] = useState({ data: false });
-  const [search, setSearch] = useState('');
-  const [info, setInfo] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [noUser, setNoUser] = useState(false);
-  const [toast, setToast] = useState(false);
+  const [data, setData] = useState({ data: false }); // connection status
+  const [search, setSearch] = useState(''); // search query
+  const [info, setInfo] = useState({}); // user data
+  const [loading, setLoading] = useState(false); // loading indicator boolean
+  const [noUser, setNoUser] = useState(false); // no user found boolean
+  const [toast, setToast] = useState(false); // no user found alert boolean
+  const [refresh, setRefresh] = useState(false); // refresh button render boolean
+  const [invalid, setInvalid] = useState(false); // input invalid boolean
 
   var debounce = require('lodash.debounce');
+  var isequal = require('lodash.isequal');
 
   function callBackendAPI() {
     axios
@@ -76,15 +79,23 @@ function App() {
 
   useEffect(() => {
     setInfo({});
+
+    if (!isequal(search, '')) {
+      submit();
+    }
   }, [search]);
 
   useEffect(() => {
-    if (!('user_id' in info) && info !== {}) {
+    if (!isequal(info, {})) {
       setToast(true);
+      setRefresh(true);
     }
   }, [info]);
 
-  const debouncedSubmit = useMemo(() => debounce(() => submit(), 300), []);
+  const debouncedSubmit = useMemo(
+    () => debounce((e) => setSearch(e.target.value), 300),
+    []
+  );
 
   return (
     <>
@@ -106,26 +117,20 @@ function App() {
           </Center>
 
           <Input
-            onChange={(e) => {
-              setSearch(e.target.value);
-              debouncedSubmit;
-            }}
+            onChange={debouncedSubmit}
+            disabled={data.data ? false : true}
+            isInvalid={invalid ? true : false}
           ></Input>
           <HStack divider={<Divider orientation="vertical" />} justify="center">
-            <Button
-              onClick={() => submit()}
-              disabled={data.data ? false : true}
-              colorScheme="green"
-            >
-              Submit
-            </Button>
-            <Button
-              onClick={() => console.log(data)}
-              disabled={data.data ? false : true}
-              variant="outline"
-            >
-              Refresh
-            </Button>
+            {refresh ? (
+              <Button
+                onClick={() => console.log(data)}
+                disabled={data.data ? false : true}
+                variant="outline"
+              >
+                Refresh
+              </Button>
+            ) : null}
           </HStack>
           {noUser ? (
             <Center>

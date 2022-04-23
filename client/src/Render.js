@@ -23,11 +23,13 @@ import {
 
 export function RenderData(props) {
   var data = props.data;
+  var keys = require('lodash.keys');
+  var isequal = require('lodash.isequal');
 
   const toast = props.toast;
   const alert = useToast();
 
-  if (!('user_id' in data)) {
+  if (isequal(data, {})) {
     return null;
   }
 
