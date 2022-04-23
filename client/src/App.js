@@ -152,7 +152,7 @@ function App() {
           ) : null}
           {invalid ? (
             <Center>
-              <Heading as="h4" color="red">
+              <Heading as="h5" color="red">
                 Invalid Username
               </Heading>
             </Center>
