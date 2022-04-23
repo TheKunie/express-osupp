@@ -52,6 +52,9 @@ function App() {
   }
 
   const validate = (str) => {
+    if (isequal(str, '')) {
+      return true;
+    }
     return validator.isAlphanumeric(str, 'en-US', ' -[]_');
   };
 
@@ -87,10 +90,10 @@ function App() {
 
     if (!validate(search)) {
       setInvalid(true);
-      return null;
     }
 
-    if (!isequal(search, '')) {
+    if (!isequal(search, '') && validate(search)) {
+      setInvalid(false);
       submit();
     }
   }, [search]);
