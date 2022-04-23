@@ -52,7 +52,7 @@ function App() {
   }
 
   const validate = (str) => {
-    return validate.isAlphanumeric(str, 'en-US', ' -[]_');
+    return validator.isAlphanumeric(str, 'en-US', ' -[]_');
   };
 
   const submit = () => {
