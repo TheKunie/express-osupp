@@ -26,6 +26,8 @@ function App() {
   const [noUser, setNoUser] = useState(false);
   const [toast, setToast] = useState(false);
 
+  var debounce = require('lodash.debounce');
+
   function callBackendAPI() {
     axios
       .get('/express_backend')
@@ -82,6 +84,8 @@ function App() {
     }
   }, [info]);
 
+  const debouncedSubmit = useMemo(() => debounce(() => submit(), 300), []);
+
   return (
     <>
       <Container centerContent>
@@ -101,7 +105,12 @@ function App() {
             </HStack>
           </Center>
 
-          <Input onChange={(e) => setSearch(e.target.value)}></Input>
+          <Input
+            onChange={(e) => {
+              setSearch(e.target.value);
+              debouncedSubmit;
+            }}
+          ></Input>
           <HStack divider={<Divider orientation="vertical" />} justify="center">
             <Button
               onClick={() => submit()}
